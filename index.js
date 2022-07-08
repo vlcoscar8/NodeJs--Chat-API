@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import { Server } from "socket.io";
 import { connect } from "./config/connect.database.js";
 import { authRoutes } from "./routes/auth.routes.js";
+import { chatRoutes } from "./routes/chat.routes.js";
 
 dotenv.config();
 
@@ -59,6 +60,7 @@ app.use(
 // Routing
 app.use("/", router);
 app.use("/auth", authRoutes);
+app.use("/chat", chatRoutes);
 
 //Errors
 app.use("*", (req, res, next) => {

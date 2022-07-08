@@ -10,7 +10,7 @@ const chatSchema = new Schema({
             ref: "User",
         },
     ],
-    usersJoined: [
+    users: [
         {
             type: mongoose.Types.ObjectId,
             ref: "User",

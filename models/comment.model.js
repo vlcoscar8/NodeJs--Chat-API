@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
     id: { type: Number, required: true },
-    chatId: { type: String, required: true },
+    chatId: { type: Number, required: true },
     from: [
         {
             type: mongoose.Types.ObjectId,

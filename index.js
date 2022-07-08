@@ -6,6 +6,7 @@ import http from "http";
 import dotenv from "dotenv";
 import { Server } from "socket.io";
 import { connect } from "./config/connect.database.js";
+import { authRoutes } from "./routes/auth.routes.js";
 
 dotenv.config();
 
@@ -57,9 +58,7 @@ app.use(
 
 // Routing
 app.use("/", router);
-router.get("/", (req, res) => {
-    res.send("hello world");
-});
+app.use("/auth", authRoutes);
 
 //Errors
 app.use("*", (req, res, next) => {

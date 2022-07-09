@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 import { connect } from "./config/connect.database.js";
 import { authRoutes } from "./routes/auth.routes.js";
 import { chatRoutes } from "./routes/chat.routes.js";
+import { userRoutes } from "./routes/user.routes.js";
 
 dotenv.config();
 
@@ -61,6 +62,7 @@ app.use(
 app.use("/", router);
 app.use("/auth", authRoutes);
 app.use("/chat", chatRoutes);
+app.use("/user", userRoutes);
 
 //Errors
 app.use("*", (req, res, next) => {

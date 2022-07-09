@@ -32,6 +32,12 @@ const createChat = async (req, res, next) => {
 
         const chatCreated = await Chat.findOne({ id: newChat.id });
 
+        await User.findByIdAndUpdate(id, {
+            $push: {
+                chats: chatCreated,
+            },
+        });
+
         res.status(200).json(chatCreated);
     } catch (error) {
         next(error);

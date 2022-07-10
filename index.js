@@ -21,9 +21,7 @@ const PORT = process.env.PORT;
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "https://react-chat-socket-oscar.netlify.app/home",
-        methods: ["GET", "POST"],
-        credentials: true,
+        origin: "*",
     },
 });
 

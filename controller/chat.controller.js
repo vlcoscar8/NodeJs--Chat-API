@@ -11,7 +11,7 @@ const chatDetail = async (req, res, next) => {
             .populate({
                 path: "comments",
                 model: Comment,
-                populate: [{ path: "from", model: Comment }],
+                populate: [{ path: "from", model: User }],
             });
 
         res.status(200).json(chat);

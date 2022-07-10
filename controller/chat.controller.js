@@ -8,7 +8,11 @@ const chatDetail = async (req, res, next) => {
         const chat = await Chat.findOne({ id: id })
             .populate("owner")
             .populate("users")
-            .populate("comments");
+            .populate({
+                path: "comments",
+                model: Comment,
+                populate: [{ path: "from", model: Comment }],
+            });
 
         res.status(200).json(chat);
     } catch (error) {
@@ -145,9 +149,16 @@ const addCommentToChat = async (req, res, next) => {
             }
         );
 
-        const chatUpdated = await Chat.findOne({ id: chatId }).populate(
-            "comments"
-        );
+        const chatUpdated = await Chat.findOne({ id: chatId }).populate({
+            path: "comments",
+            model: Comment,
+            populate: [
+                {
+                    path: "from",
+                    model: User,
+                },
+            ],
+        });
 
         res.status(200).json(chatUpdated);
     } catch (error) {

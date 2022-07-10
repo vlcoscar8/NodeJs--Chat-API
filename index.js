@@ -19,7 +19,13 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 const DB_URL = process.env.DB_URL;
 const PORT = process.env.PORT;
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "https://react-chat-socket-oscar.netlify.app/home",
+        methods: ["GET", "POST"],
+        credentials: true,
+    },
+});
 
 //Socket connection
 io.on("connection", (socket) => {

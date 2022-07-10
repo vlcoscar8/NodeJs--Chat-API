@@ -50,12 +50,22 @@ const addUserToChat = async (req, res, next) => {
         const { username } = req.body;
 
         const user = await User.findOne({ username: username });
+        const chat = await Chat.findOne({ id: chatId });
 
         await Chat.findOneAndUpdate(
             { id: chatId },
             {
                 $push: {
                     users: user,
+                },
+            }
+        );
+
+        await User.findOneAndUpdate(
+            { username: username },
+            {
+                $push: {
+                    chats: chat,
                 },
             }
         );
@@ -76,12 +86,22 @@ const deleteUserFromChat = async (req, res, next) => {
         const { username } = req.body;
 
         const user = await User.findOne({ username: username });
+        const chat = await Chat.findOne({ id: chatId });
 
         await Chat.findOneAndUpdate(
             { id: chatId },
             {
                 $pull: {
                     users: user._id,
+                },
+            }
+        );
+
+        await User.findOneAndUpdate(
+            { username: username },
+            {
+                $pull: {
+                    chats: chat._id,
                 },
             }
         );

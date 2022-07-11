@@ -33,8 +33,8 @@ io.on("connection", (socket) => {
         console.log("User created");
     });
 
-    socket.on("new message", (data) => {
-        io.emit("new message", data);
+    socket.on("post to database", (data) => {
+        io.emit("send to client", data);
     });
 });
 
